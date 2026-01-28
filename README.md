@@ -1,191 +1,284 @@
 # 🇪🇸 Licitaciones y Contratación Pública de España
 
-Dataset completo de contratación pública española con datos de múltiples fuentes:
+**El dataset más completo de contratación pública española en formato abierto.**
+
+## ⚠️ Importante: ¿Por qué hay una carpeta "Catalunya"?
+
+**No es una división política, es una ampliación de datos.**
+
+| Carpeta | Fuente | Qué contiene |
+|---------|--------|--------------|
+| `nacional/` | PLACSP (Hacienda) | Licitaciones de **TODA España** (incluida Catalunya) |
+| `catalunya/` | Portal Transparència | Datos **ADICIONALES** que solo publica la Generalitat |
+
+La carpeta `catalunya/` **NO duplica** los datos nacionales. Contiene información que **no existe en PLACSP**:
+
+- 📊 **9.6 millones de subvenciones** (registro RAISC)
+- 💰 **Presupuestos detallados** de la Generalitat (2014-2025)
+- 📝 **Convenios** de colaboración
+- 🏛️ **Entidades** del sector público catalán
+- 👔 **Retribuciones** de altos cargos y funcionarios
+- 🗺️ **Datos territoriales** (municipios, comarcas)
+- 📋 **Datos específicos de Barcelona** (contratos menores, contratistas)
+
+**Si solo te interesan las licitaciones → usa `nacional/`**  
+**Si quieres subvenciones, presupuestos, convenios de Catalunya → usa `catalunya/`**
+
+---
+
+## 📊 Resumen de datos
 
 | Fuente | Registros | Período | Cobertura |
 |--------|-----------|---------|-----------|
 | **PLACSP** (Nacional) | 8.7M | 2012-2026 | Todas las CCAA |
-| **Catalunya** | 17.6M | 2014-2025 | Generalitat + Ayto. Barcelona |
+| **Catalunya** (adicional) | 17.6M | 2014-2025 | Solo Generalitat |
+| **Total** | **26.3M** | | |
+
+---
 
 ## 📂 Estructura del repositorio
 
 ```
 licitaciones-espana/
-├── nacional/
-│   ├── licitaciones_espana.parquet              # 641 MB - Última versión
-│   ├── licitaciones_completo_2012_2026.parquet  # 780 MB - Historial completo
-│   └── licitaciones.py                          # Script extracción PLACSP
 │
-├── catalunya/
-│   ├── contratacion/
-│   │   ├── contratos_registro.parquet           # ⭐ 461 MB - MASTER (3.4M reg)
-│   │   ├── publicaciones_pscp.parquet           # 414 MB - Ciclo completo (1.6M)
+├── nacional/                                      # 🇪🇸 TODA ESPAÑA
+│   ├── licitaciones_espana.parquet                # 626 MB - Última versión
+│   ├── licitaciones_completo_2012_2026.parquet    # 762 MB - Historial
+│   └── licitaciones.py                            # Script extracción
+│
+├── catalunya/                                     # 🏛️ DATOS ADICIONALES
+│   │
+│   ├── contratacion/                              # Complementa PLACSP
+│   │   ├── contratos_registro.parquet             # ⭐ 461 MB (3.4M reg)
+│   │   ├── publicaciones_pscp.parquet             # 414 MB (1.6M reg)
 │   │   ├── adjudicaciones_generalitat.parquet
 │   │   ├── contratacion_programada.parquet
 │   │   ├── contratos_covid.parquet
 │   │   ├── fase_ejecucion.parquet
 │   │   ├── resoluciones_tribunal.parquet
-│   │   ├── contratistas_bcn.parquet             # Barcelona
-│   │   ├── contratos_menores_bcn.parquet
-│   │   ├── modificaciones_bcn.parquet
-│   │   ├── perfil_contratante_bcn.parquet
-│   │   └── resumen_trimestral_bcn.parquet
-│   ├── subvenciones/
-│   │   ├── raisc_concesiones.parquet            # ⭐ 119 MB - MASTER (9.6M reg)
+│   │   ├── contratistas_bcn.parquet               # Barcelona
+│   │   ├── contratos_menores_bcn.parquet          # Barcelona
+│   │   ├── modificaciones_bcn.parquet             # Barcelona
+│   │   ├── perfil_contratante_bcn.parquet         # Barcelona
+│   │   └── resumen_trimestral_bcn.parquet         # Barcelona
+│   │
+│   ├── subvenciones/                              # 🆕 NO EXISTE EN PLACSP
+│   │   ├── raisc_concesiones.parquet              # ⭐ 119 MB (9.6M reg)
 │   │   ├── raisc_convocatorias.parquet
 │   │   └── convocatorias_subvenciones.parquet
-│   ├── presupuestos/
-│   │   ├── ejecucion_gastos.parquet             # 2014-2025
+│   │
+│   ├── presupuestos/                              # 🆕 NO EXISTE EN PLACSP
+│   │   ├── ejecucion_gastos.parquet               # 2014-2025
 │   │   ├── ejecucion_ingresos.parquet
 │   │   └── presupuestos_aprobados.parquet
-│   ├── entidades/
-│   │   ├── ens_locals.parquet                   # Todos los entes locales
+│   │
+│   ├── entidades/                                 # 🆕 NO EXISTE EN PLACSP
+│   │   ├── ens_locals.parquet
 │   │   ├── sector_publico_generalitat.parquet
 │   │   ├── ajuntaments.parquet
 │   │   ├── ajuntaments_lista.parquet
 │   │   ├── codigos_departamentos.parquet
 │   │   └── composicio_plens.parquet
-│   ├── convenios/
+│   │
+│   ├── convenios/                                 # 🆕 NO EXISTE EN PLACSP
 │   │   └── convenios.parquet
-│   ├── rrhh/
+│   │
+│   ├── rrhh/                                      # 🆕 NO EXISTE EN PLACSP
 │   │   ├── altos_cargos.parquet
 │   │   ├── retribuciones_funcionarios.parquet
 │   │   ├── retribuciones_laboral.parquet
 │   │   ├── taules_retributives.parquet
 │   │   ├── convocatorias_personal.parquet
 │   │   └── enunciats_examens.parquet
+│   │
 │   ├── territorio/
 │   │   ├── municipis_catalunya.parquet
 │   │   └── municipis_espanya.parquet
+│   │
 │   └── README.md
 │
 ├── scripts/
-│   ├── ccaa_cataluna.py                         # Script descarga CSV
-│   └── ccaa_cataluna_parquet.py                 # Script conversión Parquet
+│   ├── ccaa_cataluna.py                           # Descarga CSVs
+│   └── ccaa_cataluna_parquet.py                   # Conversión Parquet
 │
-├── .gitattributes
-├── .gitignore
-├── requirements.txt
 └── README.md
 ```
 
-## 📊 Resumen de datos
+---
 
-### Nacional (PLACSP)
+## 🔍 Detalle por fuente
 
-| Conjunto | Registros | Período |
-|----------|-----------|---------|
-| Licitaciones | 3.6M | 2012 - actualidad |
-| Agregación CCAA | 1.7M | 2016 - actualidad |
-| Contratos menores | 3.3M | 2018 - actualidad |
-| Encargos medios propios | 14.7K | 2021 - actualidad |
-| Consultas preliminares | 3.7K | 2022 - actualidad |
-| **Total** | **8.7M** | **2012 - 2026** |
+### Nacional (PLACSP) - `nacional/`
 
-### Catalunya
+Datos de la **Plataforma de Contratación del Sector Público** del Ministerio de Hacienda.
 
-| Categoría | Registros | Datasets | Tamaño |
-|-----------|-----------|----------|--------|
-| Contratación | 5.1M | 12 | 900 MB |
-| Subvenciones (RAISC) | 9.7M | 3 | 120 MB |
-| Presupuestos | 2.5M | 3 | 50 MB |
-| Entidades | 150K | 6 | 15 MB |
-| Convenios | 45K | 1 | 8 MB |
-| RRHH | 50K | 6 | 5 MB |
-| Territorio | 10K | 2 | 2 MB |
-| **Total** | **17.6M** | **33** | **1.1 GB** |
+| Dataset | Registros | Descripción |
+|---------|-----------|-------------|
+| Licitaciones | 3.6M | Contratos de todas las CCAA |
+| Agregación CCAA | 1.7M | Contratos agregados autonómicos |
+| Contratos menores | 3.3M | Contratos < 15.000€ |
+| Encargos medios propios | 14.7K | Encargos a entidades propias |
+| Consultas preliminares | 3.7K | CPM |
+| **Total** | **8.7M** | **2012-2026** |
 
-## 📥 Descarga y uso
+**Campos principales:** expediente, objeto, órgano_contratante, tipo_contrato, procedimiento, importe_sin_iva, importe_adjudicacion, adjudicatario, nif_adjudicatario, cpv, nuts, fecha_publicacion, fecha_adjudicacion, estado...
+
+### Catalunya - `catalunya/`
+
+Datos del **Portal de Transparència de Catalunya** y **Open Data Barcelona**.
+
+#### Contratación (complementa PLACSP)
+| Dataset | Registros | Descripción |
+|---------|-----------|-------------|
+| contratos_registro | 3.4M | Registro público contratos |
+| publicaciones_pscp | 1.6M | Ciclo completo licitación |
+| adjudicaciones_generalitat | 200K | Adjudicaciones |
+| fase_ejecucion | 80K | Contratos en ejecución |
+| contratacion_programada | 15K | Contratación planificada |
+| contratos_covid | 5K | Emergencia COVID-19 |
+| resoluciones_tribunal | 2K | Tribunal de Contratos |
+| *_bcn | 180K | Datos Ayuntamiento Barcelona |
+
+#### Subvenciones (EXCLUSIVO)
+| Dataset | Registros | Descripción |
+|---------|-----------|-------------|
+| raisc_concesiones | **9.6M** | Todas las subvenciones Catalunya |
+| raisc_convocatorias | 50K | Convocatorias |
+| convocatorias_subvenciones | 30K | Convocatorias activas |
+
+#### Presupuestos (EXCLUSIVO)
+| Dataset | Registros | Descripción |
+|---------|-----------|-------------|
+| ejecucion_gastos | 2M | Ejecución presupuestaria gastos |
+| ejecucion_ingresos | 300K | Ejecución presupuestaria ingresos |
+| presupuestos_aprobados | 200K | Presupuestos aprobados |
+
+#### Entidades (EXCLUSIVO)
+| Dataset | Descripción |
+|---------|-------------|
+| ens_locals | Todos los entes locales de Catalunya |
+| sector_publico_generalitat | Entidades sector público |
+| ajuntaments | Datos de ayuntamientos |
+| composicio_plens | Composición plenos municipales |
+
+#### Otros (EXCLUSIVO)
+| Dataset | Descripción |
+|---------|-------------|
+| convenios | Convenios de colaboración |
+| altos_cargos | Retribuciones altos cargos |
+| retribuciones_* | Tablas salariales funcionarios |
+
+---
+
+## 📥 Uso rápido
 
 ```python
 import pandas as pd
 
-# === NACIONAL (PLACSP) ===
-df_nacional = pd.read_parquet('nacional/licitaciones_espana.parquet')
+# === LICITACIONES DE TODA ESPAÑA ===
+df = pd.read_parquet('nacional/licitaciones_espana.parquet')
 
-# === CATALUNYA ===
-# Contratos formalizados (dataset principal)
-df_cat = pd.read_parquet('catalunya/contratacion/contratos_registro.parquet')
+# Filtrar por comunidad autónoma
+df_cat = df[df['nuts'].str.startswith('ES51', na=False)]  # Catalunya
+df_mad = df[df['nuts'].str.startswith('ES30', na=False)]  # Madrid
 
-# Subvenciones (9.6M registros)
+# === SUBVENCIONES CATALUNYA (no existe a nivel nacional) ===
 df_subv = pd.read_parquet('catalunya/subvenciones/raisc_concesiones.parquet')
 
-# Presupuestos Generalitat (2014-2025)
+# === PRESUPUESTOS CATALUNYA ===
 df_pres = pd.read_parquet('catalunya/presupuestos/ejecucion_gastos.parquet')
 
-# Entes locales de Catalunya
-df_ents = pd.read_parquet('catalunya/entidades/ens_locals.parquet')
-
-# Cargar solo columnas específicas (más rápido)
-df = pd.read_parquet('catalunya/contratacion/contratos_registro.parquet',
-                     columns=['Codi_expedient', 'Objecte', 'Import_adjudicacio_sense_IVA'])
+# === CARGAR SOLO COLUMNAS ESPECÍFICAS (más rápido) ===
+df = pd.read_parquet('nacional/licitaciones_espana.parquet',
+                     columns=['expediente', 'objeto', 'importe_sin_iva', 'adjudicatario'])
 ```
 
-## 🔧 Regenerar datos
+---
+
+## 🔧 Fuentes y metodología
 
 ### Nacional (PLACSP)
+
+**Fuente:** [Datos Abiertos - Ministerio de Hacienda](https://www.hacienda.gob.es/es-ES/GobiernoAbierto/Datos%20Abiertos/Paginas/licitaciones_plataforma_contratacion.aspx)
+
+**Proceso:**
+1. Descarga de 78 archivos ZIP (~15 GB)
+2. Parsing de XML en formato CODICE (estándar europeo)
+3. Conversión a Parquet
+
+### Catalunya
+
+**Fuentes:**
+- [Portal Transparència Catalunya](https://analisi.transparenciacatalunya.cat/) (API Socrata)
+- [Open Data Barcelona](https://opendata-ajuntament.barcelona.cat/) (API CKAN)
+
+**Proceso:**
+1. Descarga vía API pública: `https://analisi.transparenciacatalunya.cat/api/views/{ID}/rows.csv`
+2. Consolidación de archivos anuales (Barcelona)
+3. Conversión a Parquet (90% reducción de tamaño)
+
+**No hay scraping.** Todo se obtiene de APIs públicas oficiales. Los scripts están disponibles en `scripts/` para replicar el proceso.
+
+---
+
+## 🔄 Actualización
+
+### Nacional
 ```bash
 cd nacional
-python licitaciones.py
+python licitaciones.py  # Descarga y procesa (~2h)
 ```
 
 ### Catalunya
 ```bash
 cd scripts
-
-# 1. Descargar CSVs (~12 GB)
-python ccaa_cataluna.py
-
-# 2. Convertir a Parquet (~1.1 GB)
-python ccaa_cataluna_parquet.py
+python ccaa_cataluna.py           # Descarga CSVs (~12 GB, ~30min)
+python ccaa_cataluna_parquet.py   # Convierte a Parquet (~5min)
 ```
 
-## 📋 Campos principales
+---
 
-### Nacional (PLACSP) - 48 columnas
+## 📋 Requisitos
 
-| Categoría | Campos |
-|-----------|--------|
-| **Identificación** | id, expediente, objeto, url |
-| **Órgano** | organo_contratante, nif_organo, dir3_organo |
-| **Tipo** | tipo_contrato, procedimiento, estado |
-| **Importes** | importe_sin_iva, importe_con_iva, importe_adjudicacion |
-| **Adjudicación** | adjudicatario, nif_adjudicatario, num_ofertas, es_pyme |
-| **Clasificación** | cpv_principal, nuts, ubicacion |
-| **Fechas** | fecha_publicacion, fecha_limite, fecha_adjudicacion |
+```bash
+pip install pandas pyarrow requests
+```
 
-### Catalunya - Contratos (~40 columnas)
+---
 
-| Categoría | Campos |
-|-----------|--------|
-| **Identificación** | Codi_expedient, Objecte, Numero_contracte |
-| **Órgano** | Organ_contractacio, Codi_organ, NIF_organ |
-| **Tipo** | Tipus_contracte, Procediment, Estat |
-| **Importes** | Import_licitacio_sense_IVA, Import_adjudicacio_sense_IVA |
-| **Adjudicación** | Adjudicatari, NIF_adjudicatari, Numero_ofertes |
-| **Clasificación** | CPV, Codi_NUTS |
-| **Fechas** | Data_publicacio, Data_adjudicacio, Data_formalitzacio |
+## ❓ FAQ
 
-## 📝 Fuentes de datos
+**¿Los datos de Catalunya están duplicados con los nacionales?**  
+En contratación hay solapamiento parcial. Pero subvenciones, presupuestos, convenios, RRHH y entidades son EXCLUSIVOS de Catalunya.
 
-### Nacional
-- [Plataforma de Contratación del Sector Público (PLACSP)](https://contrataciondelsectorpublico.gob.es/)
-- [Datos Abiertos - Ministerio de Hacienda](https://www.hacienda.gob.es/es-ES/GobiernoAbierto/Datos%20Abiertos/Paginas/licitaciones_plataforma_contratacion.aspx)
+**¿Por qué Catalunya y no otras CCAA?**  
+Catalunya tiene el portal de datos abiertos más completo de España. Otras CCAA están en desarrollo para futuras versiones.
 
-### Catalunya
-- [Portal Transparència Catalunya](https://analisi.transparenciacatalunya.cat/)
-- [Open Data Barcelona](https://opendata-ajuntament.barcelona.cat/)
-- [Registre Públic de Contractes](https://contractacio.gencat.cat/)
+**¿Con qué frecuencia se actualizan?**  
+PLACSP: mensual. Catalunya: variable según dataset.
+
+**¿Puedo usar estos datos comercialmente?**  
+Sí. Son datos públicos bajo licencia de reutilización.
+
+---
 
 ## 📄 Licencia
 
-Datos públicos - [Licencia de Reutilización](https://datos.gob.es/es/aviso-legal)
+Datos públicos del Gobierno de España y Generalitat de Catalunya.
+- [Licencia de Reutilización - datos.gob.es](https://datos.gob.es/es/aviso-legal)
+
+---
 
 ## 🔗 Enlaces
 
+- [Plataforma de Contratación del Sector Público](https://contrataciondelsectorpublico.gob.es/)
+- [Portal Transparència Catalunya](https://analisi.transparenciacatalunya.cat/)
+- [Open Data Barcelona](https://opendata-ajuntament.barcelona.cat/)
 - [BQuant Finance](https://bquantfinance.com)
 - [Newsletter BQuant Fund Lab](https://bquantfinance.substack.com)
 
 ---
 
-⭐ Si te resulta útil, dale una estrella al repo
+⭐ **Si te resulta útil, dale una estrella al repo**
+
+🐛 **¿Problemas o sugerencias?** Abre un issue
